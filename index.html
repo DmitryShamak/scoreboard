@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+
+    <title page-title></title>
+
+    <!-- Google Open Sans -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <!-- Font awesome -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- ngDialog -->
+    <link href="bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/public/styles/style.less" type="text/css" rel="stylesheet/less">
+    <script src="bower_components/less/dist/less.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!-- Main view  -->
+<div ui-view></div>
+
+<!-- jQuery and Bootstrap -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Animate -->
+<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+
+<!--numeral-->
+<script src="bower_components/numeral/min/numeral.min.js"></script>
+
+<!--Moment Js-->
+<script src="bower_components/moment/min/moment.min.js"></script>
+
+<!-- Lodash -->
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+<!-- Angular scripts-->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+</body>
+
+<!-- Angular App Script -->
+<script src="/public/scripts/app.js"></script>
+<script src="/public/scripts/config.js"></script>
+
+<!--Angular Directives-->
+<script src="/public/scripts/directives/pageTitle.js"></script>
+<script src="/public/scripts/directives/navigation.js"></script>
+
+<!--Angular Foctories-->
+<script src="/public/scripts/factories/scoreboardDialog.js"></script>
+<script src="/public/scripts/factories/confirmDialog.js"></script>
+<script src="/public/scripts/factories/inviteDialog.js"></script>
+
+<!--Angular Controllers-->
+<script src="/public/scripts/controllers/LandingCtrl.js"></script>
+<script src="/public/scripts/controllers/NavigationCtrl.js"></script>
+<script src="/public/scripts/controllers/ScoreboardCtrl.js"></script>
+<script src="/public/scripts/controllers/SignInCtrl.js"></script>
+<script src="/public/scripts/controllers/LogInCtrl.js"></script>
+</html>

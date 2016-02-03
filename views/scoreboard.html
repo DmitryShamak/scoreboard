@@ -1,0 +1,44 @@
+<div navigation></div>
+<div class="page-wrapper">
+	<div class="scoreboard-wrapper">
+		<div class="scoreboard-items-wrapper">
+			<div class="counter-item">
+				<h3>Some Title</h3>
+
+				<p>Some description</p>
+			</div>
+			<div class="scoreboard-item" ng-repeat="num in scoreboard.nums">
+				<div class="num-content clearfix" ng-class="{'offline': !num.online}">
+					<div class="count pull-left" ng-bind="num.value"></div>
+					<div class="name pull-left" ng-bind="num.owner.name"></div>
+					<div class="action pull-right btn" ng-click="increaseNum(num);">
+						<i class="icon fa" ng-class="{'fa-plus': !num.inProgress, 'fa-refresh fa-pulse': num.inProgress}"></i>
+						<div class="animated progress-bar" 
+							title="{{(num.progressStatus).toFixed(2) * 100}}%" ng-style="{height: (num.progressStatus * 100) + '%'}"></div>
+					</div>
+					<div class="control-wrapper pull-right">
+						<div class="options-list animated fadeIn clearfix" ng-hide="num.activeOpt">
+							<div class="option-item btn pull-left" ng-repeat="option in num.options" 
+								ng-click="option.action(num);" title="{{option.text}}">
+								<i class="{{option.icon}}"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="progress-bar-wrapper" ng-hide="!num.inProgress">
+						<div class="confirm-date" ng-hide="!num.inProgress">
+							auto <span style="color: #EF6C6C; font-weight: bold;">REJECT</span> 
+							{{num.progressTimeLeft}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="scoreboard-item">
+				<div class="btn" ng-click="inviteNewUser();">
+					<i class="fa fa-plus"></i>
+					<span>Invite new user</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

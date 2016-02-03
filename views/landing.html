@@ -1,0 +1,22 @@
+<div navigation></div>
+<div class="page-wrapper clearfix">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Your history</h3>
+		</div>
+		<div class="col-xs-12">
+			<div class="links">
+				<div class="link-wrapper" ng-repeat="link in history.links track by $index">
+					<a ng-href="link.url" ng-bind="link.name"></a>
+				</div>
+				<p ng-hide="history || history.links.length" class="alert alert-info">Where you've been before?</p>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="btn" ng-click="createScoreboard();">
+				<i class="fa fa-plus"></i>
+				<span>Create New Scoreboard</span>
+			</div>
+		</div>
+	</div>
+</div>
