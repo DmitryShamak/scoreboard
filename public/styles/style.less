@@ -1,9 +1,6 @@
 * {
 	margin: 0;
 	padding: 0;
-
-	user-select: none;
-	-webkit-user-select: none;
 }
 
 html,
@@ -19,6 +16,12 @@ body {
 	margin-left: @navigationWidth;
 }
 
+.unselectable {
+  * {
+	user-select: none;
+	-webkit-user-select: none;
+  }
+}
 
 .navigation-wrapper {
     position: fixed;
