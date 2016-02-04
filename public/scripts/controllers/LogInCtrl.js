@@ -16,7 +16,7 @@ angular.module("app")
 			api.login.save({userData: userData}, function(response) {
 				$scope.busy = false;
 				//set cookies
-				$rootScope.user = {name: userData.name};
+				$rootScope.user = {name: response.name};
 				$state.go("landing");
 			}, function(error) {
 				console.log(error);
