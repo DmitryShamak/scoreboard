@@ -10,10 +10,12 @@ angular.module("app")
 			$scope.invalid = false;
 			$scope.busy = true;
 			//check data validation
-			api.user.save({userData: {
+			api.user.save({
 				name: userData.name,
 				password: userData.password
-			}}, function(response) {
+			}, function(response) {
+				//set cookie
+				document.cookie = response.token;
 				$rootScope.user = userData.name;
 				//set data to db
 				$state.go("landing");

@@ -3,11 +3,13 @@
 var koa = require("koa");
 var serve = require('koa-static');
 var _ = require('koa-route');
+var koaBody = require('koa-body');
 
 var compose = require("koa-compose");
 var path = require("path");
 var app = koa();
 
+var route = require("./secure/route.js");
 
 var projectRoot = __dirname;
 var stylesRoot = path.join(projectRoot, "public/styles");
@@ -42,22 +44,12 @@ app.use(function* (next) {
 })
 
 var port = 3333;
+app.use(koaBody({formidable:{uploadDir: __dirname}}));
+app.use(_.post('/api/user', route.user.save));
+app.use(_.post('/api/authenticate', route.user.authenticate));
+app.use(_.post('/api/login', route.user.login));
+app.use(_.get('/api/user/:id', route.user.get));
 
-var user = {
-    save: function*() {
-        this.body = JSON.stringify({name: "Dmitry"});
-    },
-    get: function*() {
-        this.body = JSON.stringify({name: "Dmitry"});
-    },
-    login: function*() {
-        this.body = JSON.stringify({name: "Dmitry"});
-    }
-};
-
-app.use(_.post('/api/user', user.save));
-app.use(_.post('/api/login', user.login));
-app.use(_.get('/api/user/:id', user.get));
 
 var server = app.listen(port, function() {
 	console.log("Server available on [%s] port", port);

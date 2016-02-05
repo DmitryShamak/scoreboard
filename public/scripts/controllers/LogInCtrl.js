@@ -13,9 +13,10 @@ angular.module("app")
 			$scope.invalid = false;
 			$scope.busy = true;
 
-			api.login.save({userData: userData}, function(response) {
+			api.login.save(userData, function(response) {
 				$scope.busy = false;
 				//set cookies
+				document.cookie = response.token;
 				$rootScope.user = {name: response.name};
 				$state.go("landing");
 			}, function(error) {

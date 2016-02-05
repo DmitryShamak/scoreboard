@@ -11,6 +11,7 @@ angular.module("app")
         * */
         api.login = $resource("/api/login");
         api.user = $resource("/api/user/:id");
+        api.authenticate = $resource("/api/authenticate");
         api.scoreboard = $resource("/api/scoreboard/:id");
         api.search = $resource("/api/search/:catalog");
 

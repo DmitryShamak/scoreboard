@@ -27,6 +27,7 @@ function config($stateProvider, $urlRouterProvider) {
       },
       controller: function($rootScope, $state) {
         $rootScope.user = null;
+        document.cookie = null;
         $state.go("login");
       }
     })
@@ -51,10 +52,36 @@ function config($stateProvider, $urlRouterProvider) {
 angular
   .module('app')
   .config(config)
-  .run(function($rootScope, $state, $urlRouter) {
-    if(!$rootScope.user) {
-      $state.go("login");
-    }
+  .run(function($rootScope, $state, $injector) {
+    $rootScope.getToken = function() {
+        var cookie = document.cookie.split(";");
+        var token;
+        _.forEach(cookie, function(item) {
+            if(item.charAt(0) == ' ') {
+                token = item.substring(1);
+            }
+        });
+
+        return token;
+    };
+
+    $rootScope.checkAuthentication = function() {
+        if(!$rootScope.user) {
+            var api = $injector.get('api');
+            var token = $rootScope.getToken();
+            if(!token) {
+                $state.go("login");
+            }
+
+            api.authenticate.save({token: token}, function(user) {
+                $rootScope.user = user;
+            }, function(err) {
+                $state.go("login");
+            });
+        }
+    };
+
+    $rootScope.checkAuthentication();
 
     $rootScope.isAdmin = function(id, name) {
       if(id && $rootScope.user.id == id) {
