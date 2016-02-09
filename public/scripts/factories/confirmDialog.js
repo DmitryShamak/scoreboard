@@ -5,7 +5,7 @@ angular.module("app")
 			ngDialog.open({ 
 				template: '/views/popupTmpl.html',
 				controller: function($scope) {
-					$scope.rejectDelay = 2; //minutes
+					$scope.rejectDelay = 0.5; //minutes
 					$scope.increaseParams = {
 						value: 1
 					};
@@ -22,8 +22,7 @@ angular.module("app")
 							num.progressStatus = Math.min(percent, 1);
 							num.progressTimeLeft = num.rejectDate.fromNow();
 							if(num.progressStatus >= 1) {
-								num.inProgress = false;
-								num.progressStatus = 0;
+								scope.increaseNumber(num, $scope.increaseParams.value);
 								$interval.cancel(num.timer);
 							}
 						}, num.startDiff/1000);

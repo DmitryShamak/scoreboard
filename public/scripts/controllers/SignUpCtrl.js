@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("SignInCtrl", function($rootScope, $scope, $state, api) {
+	.controller("SignUpCtrl", function($rootScope, $scope, $state, api) {
 		$scope.userData = {};
 
 		$scope.signIn = function(userData) {
@@ -16,7 +16,7 @@ angular.module("app")
 			}, function(response) {
 				//set cookie
 				document.cookie = response.token;
-				$rootScope.user = userData.name;
+				$rootScope.user = {name: userData.name};
 				//set data to db
 				$state.go("landing");
 			}, function(error) {

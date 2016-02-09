@@ -47,13 +47,31 @@ body {
 	}
 
     .navigation-link {
+	  	position: relative;
 	    display: block;
+	  	padding: 0;
+
 	    line-height: 60px;
+	  	border-radius: 0;
+
 	    font-size: 20px;
 	    text-align: center;
 	    color: inherit;
 
+	  	.link-value {
+		  position: absolute;
+		  top: 5px; right: 3px;
+		  width: 20px; height: 20px;
+
+		  font-size: 15px;
+		  line-height: 20px;
+
+		  background-color: #E0791D;
+		  border-radius: 20px;
+		}
+
 		&.user-profile {
+		  padding: 10px 0;
 		  line-height: 1em;
 		  border: 0;
 		  border-radius: 0;

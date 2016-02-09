@@ -19,8 +19,8 @@ gulp.task("styles", function() {
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
-        .pipe(gulp.dest('./dist/css'))
-        .on('error', util.log);
+        .on('error', util.log)
+        .pipe(gulp.dest('./dist/css'));
 });
 
 var scriptsSrc = [
@@ -32,6 +32,7 @@ gulp.task("scripts", function() {
     return gulp.src(scriptsSrc)
         .pipe(concat('ng-script.js'))
         .pipe(gulp.dest('dist/js'))
+        .on('error', util.log)
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))

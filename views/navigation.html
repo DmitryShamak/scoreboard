@@ -7,17 +7,15 @@
 			</div>
 		</div>
 		<div class="navigation-group">
-			<a class="navigation-link" ng-repeat="link in navigation.topLinks track by $index"
-				ui-sref="{{link.state}}" ui-sref-active="selected" title="{{link.title}}" ng-class="{disabled: link.disabled}">
-				<i class="fa" ng-class="link.icon"></i>
-			</a>
+			<div ng-repeat="link in navigation.topLinks track by $index">
+				<div navigation-link="link"></div>
+			</div>
 		</div>
 
 		<div class="navigation-group bottom-group">
-			<a class="navigation-link" ng-repeat="link in navigation.bottomLinks track by $index"
-			   ui-sref="{{link.state}}" ui-sref-active="selected" title="{{link.title}}" ng-class="{disabled: link.disabled}">
-				<i class="fa" ng-class="link.icon"></i>
-			</a>
+			<div ng-repeat="link in navigation.bottomLinks track by $index">
+				<div navigation-link="link"></div>
+			</div>
 		</div>
 	</div>
 </div>

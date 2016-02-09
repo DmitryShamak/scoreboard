@@ -1,55 +1,27 @@
 'use strict';
-
-var koa = require("koa");
-var serve = require('koa-static');
-var _ = require('koa-route');
-var koaBody = require('koa-body');
-
-var compose = require("koa-compose");
+var express = require("express");
+var bodyParser = require("body-parser");
 var path = require("path");
-var app = koa();
 
-var route = require("./secure/route.js");
+var app = express();
+var port = 3334,
+    rootPath = __dirname;
 
-var projectRoot = __dirname;
-var stylesRoot = path.join(projectRoot, "public/styles");
-var staticRoot = path.join(projectRoot);
+var staticRoot = path.join(rootPath);
 
-var middlewareStack = [
-    require('koa-less')(stylesRoot, {
-	  dest: stylesRoot
-	}),
-    // компилирует less в css, если был запрошен файл со стилями, имеет много интересных опций
-    require('koa-logger')(), // логирует все http запросы
-    require('koa-favicon')(staticRoot + '/favicon.ico'),
-    require('koa-static')(staticRoot), // отдает статику, удобно для разработки, лучше конечно делать это nginx`ом
-];
 
-require('koa-locals')(app); 
-// добавляет объект locals к контексту запроса, в который вы можете записывать все, что угодно
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.use(compose(middlewareStack));
+app.use("/", express.static(staticRoot));
 
-//error handler
-app.use(function* (next) {
-    try {
-        yield next
-    } catch (err) {
-        this.app.emit('error', err, this); // транслировать тело ошибки в консоль
-        yield this.render('service/error', {
-            message: err.message,
-            error: err
-        })
-    }
-})
+var router = require("./secure/router.js")(app);
 
-var port = 3333;
-app.use(koaBody({formidable:{uploadDir: __dirname}}));
-app.use(_.post('/api/user', route.user.save));
-app.use(_.post('/api/authenticate', route.user.authenticate));
-app.use(_.post('/api/login', route.user.login));
-app.use(_.get('/api/user/:id', route.user.get));
-
+app.all('/*', function(req, res) {
+    res.sendfile('index.html');
+});
 
 var server = app.listen(port, function() {
 	console.log("Server available on [%s] port", port);

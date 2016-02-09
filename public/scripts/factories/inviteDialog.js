@@ -1,5 +1,5 @@
 angular.module("app")
-	.factory("inviteDialog", function(ngDialog, $interval, $rootScope) {
+	.factory("inviteDialog", function(ngDialog, $interval, api) {
 		var dialog = {};
 		dialog.show = function(scope) {
 			ngDialog.open({ 
@@ -7,16 +7,16 @@ angular.module("app")
 				controller: function($scope) {
 					$scope.onConfirm = function(newUser) {
 						//get user by name
-						//send request to user
-						var newNum = $scope.getEmptyNum(newUser);
-						
-						if(!newNum) {
-							return;
+						if(!newUser.name || newUser.name == $scope.user.name) {
+							return console.info("Invalid user");
 						}
-
-						$scope.scoreboard.nums.push(newNum);
-
-						ngDialog.close();
+						api.user.get({name: newUser.name}, function(res) {
+							//send request to user
+							var newNum = scope.getEmptyNum(newUser.name);
+							ngDialog.close();
+						}, function(error) {
+							console.error("No such user");
+						});
 					};
 					$scope.onCancel = function() {
 						ngDialog.close();

@@ -1,17 +1,17 @@
 <div navigation></div>
-<div class="page-wrapper unselectable">
+<div class="page-wrapper animated fadeIn unselectable">
 	<div class="scoreboard-wrapper">
-		<div class="scoreboard-items-wrapper">
+		<div class="scoreboard-items-wrapper" ng-if="scoreboard && !pageParams.busy && !pageParams.offline">
 			<div class="counter-item">
-				<h3>Some Title</h3>
+				<h3 ng-bind="scoreboard.title">Some Title</h3>
 
-				<p>Some description</p>
+				<p ng-bind="scoreboard.description"></p>
 			</div>
-			<div class="scoreboard-item" ng-repeat="num in scoreboard.nums">
+			<div class="scoreboard-item" ng-repeat="num in scoreboard.data track by $index">
 				<div class="num-content clearfix" ng-class="{'offline': !num.online}">
 					<div class="count pull-left" ng-bind="num.value"></div>
-					<div class="name pull-left" ng-bind="num.owner.name"></div>
-					<div class="action pull-right btn" ng-click="increaseNum(num);">
+					<div class="name pull-left" ng-bind="num.owner"></div>
+					<div class="action pull-right btn" ng-click="suggestIncrease(num);">
 						<i class="icon fa" ng-class="{'fa-plus': !num.inProgress, 'fa-refresh fa-pulse': num.inProgress}"></i>
 						<div class="animated progress-bar" 
 							title="{{(num.progressStatus).toFixed(2) * 100}}%" ng-style="{height: (num.progressStatus * 100) + '%'}"></div>
@@ -33,12 +33,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="scoreboard-item">
+			<div class="scoreboard-item" ng-hide="!isAdmin(null, user.name)">
 				<div class="btn" ng-click="inviteNewUser();">
 					<i class="fa fa-plus"></i>
 					<span>Invite new user</span>
 				</div>
 			</div>
 		</div>
+		<p class="form-group alert alert-danger" ng-hide="!pageParams.offline">No data.</p>
+		<p class="form-group alert alert-info" ng-hide="!pageParams.busy || pageParams.offline"><i class="fa fa-refresh fa-pulse"></i> in progress..</p>
 	</div>
 </div>

@@ -10,10 +10,14 @@ angular.module("app")
         * scoreboard [add, get, update, delete]
         * */
         api.login = $resource("/api/login");
-        api.user = $resource("/api/user/:id");
+        api.user = $resource("/api/user", null, {
+            'update': { method:'PUT' }
+        });
         api.authenticate = $resource("/api/authenticate");
-        api.scoreboard = $resource("/api/scoreboard/:id");
-        api.search = $resource("/api/search/:catalog");
+        api.scoreboard = $resource("/api/scoreboard/:key", null, {
+            'update': { method:'PUT' }
+        });
+        api.search = $resource("/api/search");
 
         return api;
     });
