@@ -16,6 +16,12 @@ angular.module("app")
 				icon: "fa-home",
 				value: $scope.notificationsCount || 0
 		};
+		topLinks.sources = {
+			title: "Sources",
+			state: "sources",
+			icon: "fa-external-link",
+			value: $scope.sourcesCount || 0
+		};
 		topLinks.news = {
 			title: "News",
 			state: "news",

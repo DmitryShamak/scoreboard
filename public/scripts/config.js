@@ -1,8 +1,6 @@
 function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise("/login");
-
     jQuery.ajaxSetup({cache: true});
 
     $stateProvider
@@ -49,6 +47,22 @@ function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProv
             },
             controller: "ProfileCtrl"
         })
+        .state('sources', {
+            url: "/sources",
+            templateUrl: "/views/sources.html",
+            data: {
+                pageTitle: 'Sources'
+            },
+            controller: "SourcesCtrl"
+        })
+        .state('news', {
+            url: "/news",
+            templateUrl: "/views/news.html",
+            data: {
+                pageTitle: 'News'
+            },
+            controller: "NewsCtrl"
+        })
         .state('join', {
           url: "/join/:id",
           templateUrl: "/views/scoreboard.html",
@@ -75,6 +89,13 @@ angular
         return token;
     };
 
+        $rootScope.apply = function(scope) {
+            var phase = scope.$root.$$phase;
+            if(phase != '$apply' || phase != '$digest') {
+                scope.$apply();
+            }
+        };
+
     $rootScope.redirectToMainPage = function() {
         $state.go("landing");
     };
@@ -93,7 +114,7 @@ angular
                 var state = $state.current.name;
 
                 if(state === "login") {
-                    $scope.redirectToMainPage();
+                    $rootScope.redirectToMainPage();
                 } else {
                     $state.go(state);
                 }

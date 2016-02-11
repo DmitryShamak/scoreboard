@@ -1,0 +1,42 @@
+<div navigation></div>
+<div class="page-wrapper animated fadeIn clearfix">
+    <div class="row" ng-hide="pageParams.busy">
+        <div class="col-xs-12">
+            <h3>Your Sources</h3>
+        </div>
+        <div class="col-xs-12" ng-hide="pageParams.offline">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="text-uppercase">
+                        <th width="35%">Name</th>
+                        <th width="35%">User</th>
+                        <th width="15%">Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="source in sources track by $index">
+                        <td source-name="source"></td>
+                        <td source-user="source"></td>
+                        <td source-status="source"></td>
+                        <td>
+                            <div ng-if="!item.status" class="btn alert-danger" ng-click="deleteSource(source);">
+                                <i class="fa fa-close"></i>
+                                <span>Delete</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="alert-info">
+                            <div class="btn" ng-click="showDialog()">
+                                <i class="fa fa-plus"></i>
+                                <span>Add New Source</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p class="form-group alert alert-info" ng-hide="!pageParams.busy"><i class="fa fa-refresh fa-pulse"></i> in progress..</p>
+</div>

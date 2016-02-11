@@ -3,7 +3,7 @@ angular.module("app")
 		var dialog = {};
 		dialog.show = function(data, scope) {
 			ngDialog.open({ 
-				template: '/views/popupTmpl.html',
+				template: '/views/templates/popupTmpl.html',
 				controller: function($scope) {
 					$scope.rejectDelay = 0.5; //minutes
 					$scope.increaseParams = {

@@ -3,7 +3,7 @@ angular.module("app")
 		var dialog = {};
 		dialog.show = function(scope) {
 			ngDialog.open({ 
-				template: '/views/inviteTmpl.html',
+				template: '/views/templates/inviteTmpl.html',
 				controller: function($scope) {
 					$scope.onConfirm = function(newUser) {
 						//get user by name

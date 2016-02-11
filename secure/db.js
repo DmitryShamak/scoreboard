@@ -23,6 +23,11 @@ var Schema = mongoose.Schema,
 
 collections.userSchema = new Schema({
     name: String,
+    lastname: String,
+    address: String,
+    phone: String,
+    dob: Date,
+    email: String,
     password: String,
     token: String,
     history: Array
@@ -37,6 +42,12 @@ collections.scoreboardSchema = new Schema({
     data: Array
 });
 collections.scoreboard = mongoose.model('scoreboards', collections.scoreboardSchema);
+
+collections.sourceSchema = new Schema({
+    user: String,
+    token: String
+});
+collections.source = mongoose.model('source', collections.sourceSchema);
 
 db.find = function(collection, query, cb) {
     if(!query) {

@@ -17,6 +17,9 @@ angular.module("app")
         api.scoreboard = $resource("/api/scoreboard/:key", null, {
             'update': { method:'PUT' }
         });
+        api.source = $resource("/api/source", null, {
+            'update': { method:'PUT' }
+        });
         api.search = $resource("/api/search");
 
         return api;

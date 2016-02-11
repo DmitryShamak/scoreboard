@@ -3,7 +3,7 @@ angular.module("app")
 		var dialog = {};
 		dialog.show = function(scope) {
 			ngDialog.open({ 
-				template: '/views/scoreboardDialogTmpl.html',
+				template: '/views/templates/scoreboardDialogTmpl.html',
 				controller: function($scope) {
 					$scope.form = {};
 
